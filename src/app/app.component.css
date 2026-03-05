@@ -1,0 +1,28 @@
+h1 {
+    color: aliceblue;
+    font-size: large;
+    font: 1em sans-serif;
+.active { background: green; } 
+.error { border: 2px solid red; }
+}
+.nav {
+  display: flex;
+  gap: 15px;
+  padding: 10px 0;
+}
+
+a {
+  text-decoration: none;
+  color: #2E75B6;
+  font-weight: 500;
+}
+
+a.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.footer {
+  margin-top: 30px;
+}
+

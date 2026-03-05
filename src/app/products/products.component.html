@@ -1,0 +1,46 @@
+<h2>Product List</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{ product.id }}</td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.status }}</td>
+      <td>
+        <button (click)="viewProduct(product)">View</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="modal" *ngIf="selectedProduct">
+
+  <div class="modal-content">
+
+    <span class="close" (click)="closeModal()">X</span>
+
+    <h3>Product Details</h3>
+
+    <p><strong>ID:</strong> {{ selectedProduct.id }}</p>
+    <p><strong>Name:</strong> {{ selectedProduct.name }}</p>
+    <p><strong>Category:</strong> {{ selectedProduct.category }}</p>
+    <p><strong>Price:</strong> ₱{{ selectedProduct.price }}</p>
+    <p><strong>Stock:</strong> {{ selectedProduct.stock }}</p>
+    <p><strong>Status:</strong> {{ selectedProduct.status }}</p>
+    <p><strong>Description:</strong> {{ selectedProduct.description }}</p>
+    <p><strong>Brand:</strong> {{ selectedProduct.brand }}</p>
+    <p><strong>Rating:</strong> {{ selectedProduct.rating }}</p>
+    <p><strong>Date Added:</strong> {{ selectedProduct.dateAdded }}</p>
+
+  </div>
+
+</div>
