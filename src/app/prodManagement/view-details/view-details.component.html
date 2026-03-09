@@ -1,0 +1,21 @@
+<div class = "container mt-4">
+    @if (Product) {
+        <h2>{{ Product.name }} Details</h2>
+        <p><strong>Category:</strong> {{ Product.category }}</p>
+        <p><strong>Price:</strong> {{ Product.price | currency }}</p>
+        <p><strong>Stock:</strong> {{ Product.stock }}</p>
+        <p><strong>Status:</strong> {{ Product.status }}</p>
+        <p><strong>Brand:</strong> {{ Product.brand }}</p>
+        <p><strong>Rating:</strong> {{ Product.rating }}</p>
+        <p><strong>Date Added:</strong> {{ Product.dateAdded }}</p>
+        <p><strong>Description:</strong> {{ Product.description }}</p>
+    } else {
+        <h2>No product selected.</h2>
+    }
+    <div class = "card-footer d-flex gap-2">
+        <button class="btn btn-secondary" (click)="goBack()">Back</button>
+        <a [routerLink]="['/products', Product?.id, 'edit']" class="btn btn-warning">
+            <i class = bi bi-pencil-square></i> Edit
+        </a>
+    </div>
+</div>

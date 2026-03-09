@@ -1,16 +1,10 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Product } from '../models/product.interface';
-
-@Component({
-  selector: 'app-products',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './products.component.html',
-  styleUrl: './products.component.css'
+import { Product } from "../models/product.interface";
+import { Injectable } from "@angular/core";
+@Injectable({
+    providedIn: 'root',
 })
-export class ProductsComponent {
-    products: Product[] = [
+export class ProductService{
+    private products: Product[] = [
     { id: 1, name: 'Laptop', category: 'Electronics', price: 50000, stock: 10, status: 'Available', description: 'High performance laptop for Gaming and Coding', brand: 'Asus', rating: 4.5, dateAdded: '2026-01-01' },
     { id: 2, name: 'Phone', category: 'Electronics', price: 20000, stock: 0, status: 'Out of Stock', description: 'Smartphone with Advance', brand: 'Honor', rating: 4.7, dateAdded: '2026-01-05' },
     { id: 3, name: 'Keyboard', category: 'Accessories', price: 1500, stock: 5, status: 'Limited', description: 'Mechanical keyboard', brand: 'Logitech', rating: 4.3, dateAdded: '2026-01-10' },
@@ -22,14 +16,18 @@ export class ProductsComponent {
     { id: 9, name: 'Webcam', category: 'Accessories', price: 3200, stock: 0, status: 'Out of Stock', description: 'HD webcam', brand: 'Logitech', rating: 4.0, dateAdded: '2026-02-10' },
     { id: 10, name: 'Router', category: 'Networking', price: 5000, stock: 6, status: 'Available', description: 'WiFi 6 Router', brand: 'TP-Link', rating: 4.5, dateAdded: '2026-02-15' }
   ];
+   selectedProduct: Product | null = null;
+    getProducts():Product[]{
+        return this.products;
+    }
+    getProductsById(id: number): Product| undefined{
+        return this.products.find(e => e.id === id);
+    }
 
-  selectedProduct: Product | null = null;
+    updateProduct(updated: Product): void {
+        const idx = this.products.findIndex(e => e.id === updated.id);
+        if (idx !== -1) this.products[idx] = { ...updated }
+    }
+    
 
-  // View button click
-  viewProduct(product: Product): void {
-    this.selectedProduct = product;
-  }
-   closeModal(): void {
-    this.selectedProduct = null;
-   }
 }

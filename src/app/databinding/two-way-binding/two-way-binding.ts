@@ -1,7 +1,7 @@
 
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { UserTsComponent } from '../../user.ts/user.ts.component';
+import { UserTsComponent } from '../../user/user.ts.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
