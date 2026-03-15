@@ -99,7 +99,7 @@
     </tr>
   </thead>
   <tbody>
-    @for (u of user; track u.id){
+    @for (u of users; track u.id){
     <tr [class.table-active]="selectedId === u.id">
       <th scope="row" >{{ u.id }}</th>
       <td>{{ u.name }}</td>

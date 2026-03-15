@@ -20,7 +20,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let product of products | filter:searchTerm">
+            <tr *ngFor="let product of filteredProducts">
                 <td>{{ product.name }}</td>
                 <td>{{ product.category }}</td>
                 <td>{{ product.price | currency }}</td>
@@ -51,3 +51,4 @@
             <p><strong>Rating:</strong> {{ selectedProduct.rating }}</p>
             <p><strong>Date Added:</strong> {{ selectedProduct.dateAdded }}</p>
             <p><strong>Description:</strong> {{ selectedProduct.description }}</p>
+          </div>

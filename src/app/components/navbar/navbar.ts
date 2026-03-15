@@ -7,10 +7,11 @@ import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, CommonModule, FormsModule, RouterModule, ProductService],
+  imports: [RouterLink, CommonModule, FormsModule, RouterModule],
   templateUrl: './navbar.html',
   styleUrls: ['./navbar.css'],
 })
 export class Navbar {
 
 }
+

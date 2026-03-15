@@ -14,11 +14,14 @@ export const routes: Routes = [
     {path: 'property-binding', component: PropertyBinding},
     {path: 'two-way-binding', component: TwoWayBinding},
     {path: 'event-binding', component: EventBinding},
-    {path: 'products', component: ProductsComponent},
-    { path: 'prodlist', component: ProdlistComponent, children: [
-        {path: ':id', children: [
-            {path: 'view', component: ViewDetailsComponent}
-        ]},
+      { path: 'products', component: ProductsComponent },
 
-    ] }
+  {
+    path: 'prodlist',
+    component: ProdlistComponent,
+    children: [
+      { path: ':id', component: ViewDetailsComponent }
+    ]
+  }
 ];
+

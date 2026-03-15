@@ -8,9 +8,10 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-view-details',
-  imports: [CommonModule, FormsModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './view-details.component.html',
-  styleUrl: './view-details.component.css'
+  styleUrls: ['./view-details.component.css']
 })
 export class ViewDetailsComponent {
   Product: Product | undefined
@@ -25,7 +26,7 @@ export class ViewDetailsComponent {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.Product = this.productService.getProductsById(id);
   }
-  goBack(): void {
-    this.router.navigate(['/products']);
-  }
+ goBack(): void {
+  this.router.navigate(['/prodlist']);
+}
 }

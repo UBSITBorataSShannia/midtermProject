@@ -1,22 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Product } from '../../models/product.interface';
 import { ProductService } from '../../services/product.service';
-import { ActivatedRoute, Router } from '@angular/router';
-
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-prodlist',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterOutlet],
   templateUrl: './prodlist.component.html',
-  styleUrl: './prodlist.component.css'
+  styleUrls: ['./prodlist.component.css']
 })
 export class ProdlistComponent implements OnInit {
+
   products: Product[] = [];
-  returnUrl: string|null = null;
-  searchPlaceholder: string = 'Search by name, category, brand...'; 
   selectedId: number | null = null;
   searchTerm = '';
+  searchPlaceholder = 'Search by name, category, brand...';
 
   constructor(
     private productService: ProductService,
@@ -30,13 +31,16 @@ export class ProdlistComponent implements OnInit {
 
   getProduct(e: Product): void {
     this.selectedId = e.id;
-    this.router.navigate(['/products', e.id]);
+    this.router.navigate(['/prodlist', e.id]);
   }
 
   getFilteredProducts(): Product[] {
+
     if (!this.searchTerm) return this.products;
+
     const term = this.searchTerm.toLowerCase();
-    return this.products.filter(p => 
+
+    return this.products.filter(p =>
       p.name.toLowerCase().includes(term) ||
       p.category.toLowerCase().includes(term) ||
       p.brand.toLowerCase().includes(term)
