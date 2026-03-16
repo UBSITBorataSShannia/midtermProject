@@ -46,4 +46,21 @@ export class ProdlistComponent implements OnInit {
       p.brand.toLowerCase().includes(term)
     );
   }
+  getBadgeClass(status: string): string {
+    switch (status) {
+      case 'Active': return 'badge-active';
+      case 'Inactive': return 'badge-inactive';
+      case 'On Hold': return 'badge-hold';
+      default: return '';
+    }
+  }
+
+  goBack(): void {
+    this.router.navigate(['/prodlist']);
+  }
+
+  goToAddProduct(): void {
+    this.router.navigate(['/prodlist/add']);
+  }
+
 }

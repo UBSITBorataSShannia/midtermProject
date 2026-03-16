@@ -1,0 +1,256 @@
+<!-- ============================================================
+  supplier-details.component.html
+  Editable form for a single supplier's full details.
+  Uses [(ngModel)] for two-way data binding on all fields.
+  ID field is readonly; all other fields are editable.
+  Save button calls saveChanges(); Back button calls goBack().
+============================================================ -->
+
+<div class="page-wrapper">
+
+  <!-- PAGE HEADER: Back arrow + title -->
+  <div class="page-header">
+    <button class="btn-back-header" (click)="goBack()" title="Back to Suppliers List">
+      ← Back to Suppliers
+    </button>
+    <div class="header-text">
+      <h1 class="page-title">
+        <span class="title-icon">📋</span>
+        Supplier Details
+      </h1>
+      <p class="page-subtitle" *ngIf="supplier">
+        Editing record for <strong>{{ supplier.supplierName }}</strong>
+      </p>
+    </div>
+  </div>
+
+  <!-- SUCCESS NOTIFICATION: Appears after Save is clicked -->
+  @if (saveSuccess) {
+    <div class="alert-success">
+      ✅ Changes saved successfully!
+    </div>
+  }
+
+  <!-- MAIN CONTENT: Shown only when supplier data is loaded -->
+  @if (supplier) {
+
+    <div class="details-card">
+
+      <!-- CARD HEADER: Supplier avatar + name -->
+      <div class="card-header">
+        <div class="avatar-large">
+          {{ supplier.supplierName.charAt(0) }}
+        </div>
+        <div class="card-header-info">
+          <div class="card-supplier-name">{{ supplier.supplierName }}</div>
+          <div class="card-supplier-id">Supplier ID #{{ supplier.id }}</div>
+        </div>
+      </div>
+
+      <!-- FORM BODY: All supplier fields with [(ngModel)] two-way binding -->
+      <div class="form-body">
+
+        <!-- SECTION: Basic Information -->
+        <div class="form-section">
+          <div class="section-title">Basic Information</div>
+
+          <div class="form-grid">
+
+            <!-- ID: Readonly field — cannot be edited -->
+            <div class="form-group">
+              <label class="form-label" for="supplierId">Supplier ID</label>
+              <input
+                type="number"
+                id="supplierId"
+                name="id"
+                class="form-input readonly"
+                [(ngModel)]="supplier.id"
+                readonly
+                title="ID cannot be edited"
+              />
+              <span class="field-hint">Read-only — cannot be modified</span>
+            </div>
+
+            <!-- Supplier Name: Two-way binding with [(ngModel)] -->
+            <div class="form-group">
+              <label class="form-label" for="supplierName">Supplier Name</label>
+              <input
+                type="text"
+                id="supplierName"
+                name="supplierName"
+                class="form-input"
+                [(ngModel)]="supplier.supplierName"
+                placeholder="Enter supplier name"
+              />
+            </div>
+
+            <!-- Status: Dropdown with [(ngModel)] -->
+            <div class="form-group">
+              <label class="form-label" for="status">Status</label>
+              <select
+                id="status"
+                name="status"
+                class="form-input"
+                [(ngModel)]="supplier.status"
+              >
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+                <option value="On Hold">On Hold</option>
+              </select>
+            </div>
+
+            <!-- Location: Two-way binding -->
+            <div class="form-group">
+              <label class="form-label" for="location">Location</label>
+              <input
+                type="text"
+                id="location"
+                name="location"
+                class="form-input"
+                [(ngModel)]="supplier.location"
+                placeholder="City, Province"
+              />
+            </div>
+
+          </div>
+        </div>
+
+        <!-- SECTION: Contact Information -->
+        <div class="form-section">
+          <div class="section-title">Contact Information</div>
+
+          <div class="form-grid">
+
+            <!-- Contact Person: Two-way binding -->
+            <div class="form-group">
+              <label class="form-label" for="contactPerson">Contact Person</label>
+              <input
+                type="text"
+                id="contactPerson"
+                name="contactPerson"
+                class="form-input"
+                [(ngModel)]="supplier.contactPerson"
+                placeholder="Full name"
+              />
+            </div>
+
+            <!-- Email: Two-way binding -->
+            <div class="form-group">
+              <label class="form-label" for="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-input"
+                [(ngModel)]="supplier.email"
+                placeholder="example@domain.com"
+              />
+            </div>
+
+            <!-- Phone: Two-way binding -->
+            <div class="form-group">
+              <label class="form-label" for="phone">Phone Number</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                class="form-input"
+                [(ngModel)]="supplier.phone"
+                placeholder="+63 XXX XXX XXXX"
+              />
+            </div>
+
+            <!-- Website (optional): Two-way binding -->
+            <div class="form-group">
+              <label class="form-label" for="website">Website (Optional)</label>
+              <input
+                type="url"
+                id="website"
+                name="website"
+                class="form-input"
+                [(ngModel)]="supplier.website"
+                placeholder="https://..."
+              />
+            </div>
+
+          </div>
+        </div>
+
+        <!-- SECTION: Products & Notes -->
+        <div class="form-section">
+          <div class="section-title">Products & Notes</div>
+
+          <div class="form-grid full-width">
+
+            <!-- Products Supplied: Textarea bound to productsText string -->
+            <div class="form-group span-full">
+              <label class="form-label" for="productsSupplied">
+                Products Supplied
+                <span class="field-hint inline">Separate multiple items with commas</span>
+              </label>
+              <textarea
+                id="productsSupplied"
+                name="productsText"
+                class="form-input form-textarea"
+                [(ngModel)]="productsText"
+                placeholder="e.g. Rice, Corn, Fertilizers"
+                rows="3"
+              ></textarea>
+            </div>
+
+            <!-- Notes (optional): Two-way binding -->
+            <div class="form-group span-full">
+              <label class="form-label" for="notes">Notes (Optional)</label>
+              <textarea
+                id="notes"
+                name="notes"
+                class="form-input form-textarea"
+                [(ngModel)]="supplier.notes"
+                placeholder="Additional remarks about this supplier..."
+                rows="3"
+              ></textarea>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- LIVE PREVIEW: Shows real-time model state while editing -->
+        <div class="form-section preview-section">
+          <div class="section-title">Live Data Preview
+            <span class="field-hint inline">Updates as you type (confirms two-way binding)</span>
+          </div>
+          <div class="preview-box">
+            <pre>{{ supplier | json }}</pre>
+          </div>
+        </div>
+
+        <!-- FORM ACTIONS: Save and Back buttons -->
+        <div class="form-actions">
+          <!-- Back button: calls goBack() to navigate to /suppliers -->
+          <button class="btn-back" (click)="goBack()">
+            ← Back to List
+          </button>
+
+          <!-- Save button: calls saveChanges() to persist edits -->
+          <button class="btn-save" (click)="saveChanges()">
+            💾 Save Changes
+          </button>
+        </div>
+
+      </div><!-- end .form-body -->
+    </div><!-- end .details-card -->
+
+  }
+
+  <!-- LOADING/NOT FOUND STATE: Shown if supplier is undefined -->
+  @if (!supplier) {
+    <div class="not-found-card">
+      <div class="not-found-icon">🔍</div>
+      <h2>Supplier Not Found</h2>
+      <p>No supplier record found with ID #{{ supplierId }}.</p>
+      <button class="btn-save" (click)="goBack()">← Return to Suppliers List</button>
+    </div>
+  }
+
+</div><!-- end .page-wrapper -->
+

@@ -7,6 +7,8 @@ import { EventBinding } from './databinding/event-binding/event-binding';
 import { ProductsComponent } from './products/products.component';
 import { ProdlistComponent } from './prodManagement/prodlist/prodlist.component';
 import { ViewDetailsComponent } from './prodManagement/view-details/view-details.component';
+import { SuppliersListComponent } from './components/suppliers-list/suppliers-list.component';
+import { SupplierDetailsComponent } from './components/supplier-details/supplier-details.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -22,6 +24,10 @@ export const routes: Routes = [
     children: [
       { path: ':id', component: ViewDetailsComponent }
     ]
-  }
+  },
+  { path: '', redirectTo: '/suppliers', pathMatch: 'full' },
+  { path: 'suppliers', component: SuppliersListComponent, title: 'Suppliers Management' },
+  { path: 'suppliers/:id', component: SupplierDetailsComponent, title: 'Supplier Details'  },
+  { path: '**', redirectTo: '/suppliers'}
 ];
 

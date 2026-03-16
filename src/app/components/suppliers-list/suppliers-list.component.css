@@ -1,0 +1,297 @@
+/* ============================================================
+   suppliers-list.component.css
+   Styles for the Suppliers List page.
+   Design: Clean, professional dashboard table with
+   subtle accents, hover effects, and status badges.
+============================================================ */
+
+/* ── Page Wrapper ── */
+.page-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Page Header ── */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.page-title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #1a1f36;
+  margin: 0 0 0.3rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.title-icon {
+  font-size: 1.7rem;
+}
+
+.page-subtitle {
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Header stat bubble */
+.header-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #0824a1, #0247c9);
+  color: #ffffff;
+  border-radius: 16px;
+  padding: 0.85rem 1.6rem;
+  min-width: 110px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.35);
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  opacity: 0.85;
+  margin-top: 0.2rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ── Table Card ── */
+.table-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+  border: 1px solid #e9ecef;
+}
+
+.table-toolbar {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #f1f3f5;
+  background: #f8f9fc;
+}
+
+.toolbar-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+/* ── Responsive Scroll Wrapper ── */
+.table-responsive {
+  overflow-x: auto;
+}
+
+/* ── Table Base ── */
+.suppliers-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+/* ── Table Head ── */
+.suppliers-table thead tr {
+  background: #f8f9fc;
+}
+
+.suppliers-table thead th {
+  padding: 0.9rem 1.2rem;
+  text-align: left;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  border-bottom: 2px solid #e9ecef;
+  white-space: nowrap;
+}
+
+/* ── Table Body Rows ── */
+.table-row {
+  border-bottom: 1px solid #f1f3f5;
+  transition: background 0.15s ease;
+}
+
+.table-row:hover {
+  background: #f5f3ff;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.suppliers-table tbody td {
+  padding: 1rem 1.2rem;
+  vertical-align: middle;
+  color: #374151;
+}
+
+/* ── Column Widths ── */
+.col-id       { width: 70px; }
+.col-name     { min-width: 240px; }
+.col-contact  { min-width: 170px; }
+.col-location { min-width: 200px; }
+.col-status   { width: 110px; }
+.col-actions  { width: 130px; text-align: center; }
+
+/* ── ID Badge ── */
+.id-badge {
+  display: inline-block;
+  background: #ede9fe;
+  color: #2176d6;
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: 8px;
+}
+
+/* ── Supplier Name Cell ── */
+.supplier-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.supplier-avatar {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #0a9bdf, #0b3181);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.supplier-name {
+  font-weight: 600;
+  color: #1a1f36;
+  margin-bottom: 0.15rem;
+}
+
+.supplier-email {
+  font-size: 0.78rem;
+  color: #9ca3af;
+}
+
+/* ── Contact Info Cell ── */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-name {
+  font-weight: 500;
+  color: #061122;
+}
+
+.contact-phone {
+  font-size: 0.78rem;
+  color: #9ca3af;
+  margin-top: 0.1rem;
+}
+
+/* ── Location Cell ── */
+.location-text {
+  color: #6b7280;
+  font-size: 0.88rem;
+}
+
+/* ── Status Badges ── */
+.badge {
+  display: inline-block;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.badge-active {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.badge-inactive {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.badge-hold {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* ── View Button ── */
+.btn-view {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 1rem;
+  background: linear-gradient(135deg, #2691cf, #0a4ea7);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+}
+
+.btn-view:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.45);
+  background: linear-gradient(135deg, #4338ca, #18a9e2);
+}
+
+.btn-view:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(79, 70, 229, 0.3);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .page-wrapper {
+    padding: 1rem;
+  }
+
+  .page-title {
+    font-size: 1.4rem;
+  }
+
+  .suppliers-table thead th,
+  .suppliers-table tbody td {
+    padding: 0.75rem 0.9rem;
+  }
+}

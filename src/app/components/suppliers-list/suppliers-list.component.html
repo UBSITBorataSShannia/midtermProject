@@ -1,0 +1,114 @@
+<!-- ============================================================
+  suppliers-list.component.html
+  Template for the Suppliers List page.
+  Uses *ngFor to iterate and render each supplier row.
+  View button uses (click) event binding for navigation.
+============================================================ -->
+
+<div class="page-wrapper">
+
+  <!-- PAGE HEADER: Title and supplier count summary -->
+  <div class="page-header">
+    <div class="header-text">
+      <h1 class="page-title">
+        <span class="title-icon">🏢</span>
+        Suppliers Management
+      </h1>
+      <p class="page-subtitle">
+        Manage and view all registered supplier records
+      </p>
+    </div>
+    <div class="header-stat">
+      <span class="stat-number">{{ suppliers.length }}</span>
+      <span class="stat-label">Total Suppliers</span>
+    </div>
+  </div>
+
+  <!-- TABLE CARD: Contains the suppliers data table -->
+  <div class="table-card">
+
+    <div class="table-toolbar">
+      <span class="toolbar-label">All Suppliers</span>
+    </div>
+
+    <!-- RESPONSIVE TABLE WRAPPER -->
+    <div class="table-responsive">
+      <table class="suppliers-table">
+
+        <!-- TABLE HEAD: Column headers -->
+        <thead>
+          <tr>
+            <th class="col-id">ID</th>
+            <th class="col-name">Supplier Name</th>
+            <th class="col-contact">Contact Person</th>
+            <th class="col-location">Location</th>
+            <th class="col-status">Status</th>
+            <th class="col-actions">Actions</th>
+          </tr>
+        </thead>
+
+        <!-- TABLE BODY: *ngFor iterates through suppliers array -->
+        <tbody>
+          @for (supplier of suppliers; track supplier.id) {
+            <tr class="table-row">
+
+              <!-- Supplier ID column -->
+              <td class="col-id">
+                <span class="id-badge">#{{ supplier.id }}</span>
+              </td>
+
+              <!-- Supplier Name column -->
+              <td class="col-name">
+                <div class="supplier-name-cell">
+                  <div class="supplier-avatar">
+                    {{ supplier.supplierName.charAt(0) }}
+                  </div>
+                  <div>
+                    <div class="supplier-name">{{ supplier.supplierName }}</div>
+                    <div class="supplier-email">{{ supplier.email }}</div>
+                  </div>
+                </div>
+              </td>
+
+              <!-- Contact Person column -->
+              <td class="col-contact">
+                <div class="contact-info">
+                  <span class="contact-name">{{ supplier.contactPerson }}</span>
+                  <span class="contact-phone">{{ supplier.phone }}</span>
+                </div>
+              </td>
+
+              <!-- Location column -->
+              <td class="col-location">
+                <span class="location-text">📍 {{ supplier.location }}</span>
+              </td>
+
+              <!-- Status column: uses getStatusClass() for color coding -->
+              <td class="col-status">
+                <span [class]="getStatusClass(supplier.status)">
+                  {{ supplier.status }}
+                </span>
+              </td>
+
+              <!-- Actions column: View button with (click) event binding -->
+              <td class="col-actions">
+                <button
+                  class="btn-view"
+                  (click)="viewSupplierDetails(supplier.id)"
+                  title="View details for {{ supplier.supplierName }}"
+                >
+                  View Details
+                </button>
+              </td>
+
+            </tr>
+          }
+        </tbody>
+
+      </table>
+    </div><!-- end .table-responsive -->
+
+  </div><!-- end .table-card -->
+
+</div><!-- end .page-wrapper -->
+

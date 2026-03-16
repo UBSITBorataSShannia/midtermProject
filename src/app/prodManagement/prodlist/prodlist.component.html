@@ -1,64 +1,94 @@
-<div class="container mt-4">
-  <h2>Product Management</h2>
+<!-- ============================================================
+   prodlist.component.html
+   Editable form for a list of products.
+   Uses [(ngModel)] for two-way data binding on all fields.
+   Save button calls saveChanges(); Back button calls goBack().
+============================================================ -->
 
-  <div class="search-box">
-    <input
-      type="text"
-      class="form-control"
-      [(ngModel)]="searchTerm"
-      placeholder="{{ searchPlaceholder }}"
-    />
+<div class="page-wrapper">
+
+  <!-- PAGE HEADER: Back arrow + title -->
+  <div class="page-header">
+    <button class="btn-back-header" (click)="goBack()" title="Back to Product List">
+      ← Back to Products
+    </button>
+    <div class="header-text">
+      <h1 class="page-title">
+        <span class="title-icon">📦</span>
+        Product Management
+      </h1>
+      <p class="page-subtitle" *ngIf="products.length">
+        Managing {{ products.length }} products
+      </p>
+    </div>
   </div>
 
-  <table class="table table-hover product-table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Category</th>
-        <th>Price</th>
-        <th>Stock</th>
-        <th>Status</th>
-        <th>Brand</th>
-        <th>Rating</th>
-      </tr>
-    </thead>
+  <!-- SUCCESS NOTIFICATION: Appears after Save is clicked -->
+  <div *ngIf="saveSuccess" class="alert-success">
+    ✅ Changes saved successfully!
+  </div>
 
-    <tbody>
-      @for (product of getFilteredProducts(); track product.id) {
-        <tr (click)="getProduct(product)">
-          <td>
-            <input class="form-control" [(ngModel)]="product.name">
-          </td>
+  <!-- MAIN CONTENT: Table of Products -->
+  <div class="table-card">
+    <div class="table-toolbar">
+      <span class="toolbar-label">Products</span>
+      <button class="btn-view" (click)="goToAddProduct()">Add New Product</button>
+    </div>
 
-          <td>
-            <input class="form-control" [(ngModel)]="product.category">
-          </td>
+    <div class="table-responsive">
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th class="col-name">Name</th>
+            <th class="col-category">Category</th>
+            <th class="col-price">Price</th>
+            <th class="col-stock">Stock</th>
+            <th class="col-status">Status</th>
+            <th class="col-brand">Brand</th>
+            <th class="col-rating">Rating</th>
+            <th class="col-actions">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of getFilteredProducts()" (click)="getProduct(product)">
+            <td>{{ product.name }}</td>
+            <td>{{ product.category }}</td>
+            <td>{{ product.price | currency }}</td>
+            <td>{{ product.stock }}</td>
+            <td>
+              <span [ngClass]="getBadgeClass(product.status)" class="badge">
+                {{ product.status }}
+              </span>
+            </td>
+            <td>{{ product.brand }}</td>
+            <td>{{ product.rating }}</td>
+            <td>
+              <button class="btn-view" (click)="editProduct(product)">
+                Edit
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-          <td>
-            <input class="form-control" type="number" [(ngModel)]="product.price">
-          </td>
+  <!-- FORM ACTIONS: Save and Back buttons -->
+  <div *ngIf="selectedId" class="form-actions">
+    <!-- Back button: calls goBack() to navigate to product list -->
+    <button class="btn-back" (click)="goBack()">← Back to List</button>
 
-          <td>
-            <input class="form-control" type="number" [(ngModel)]="product.stock">
-          </td>
+    <!-- Save button: calls saveChanges() to persist edits -->
+    <button class="btn-save" (click)="saveChanges()">💾 Save Changes</button>
+  </div>
 
-          <td>
-            <input class="form-control" [(ngModel)]="product.status">
-          </td>
+  <!-- LOADING/NOT FOUND STATE: Shown if no product is selected -->
+  <div *ngIf="!selectedId">
+    <div class="not-found-card">
+      <div class="not-found-icon">🔍</div>
+      <h2>No product selected</h2>
+      <p>Select a product to edit.</p>
+    </div>
+  </div>
 
-          <td>
-            <input class="form-control" [(ngModel)]="product.brand">
-          </td>
-
-          <td>
-            <input class="form-control" type="number" [(ngModel)]="product.rating">
-          </td>
-        </tr>
-      }
-    </tbody>
-  </table>
-
-  <!-- CHILD COMPONENT WILL LOAD HERE -->
-  <router-outlet></router-outlet>
-
-</div>
+</div><!-- end .page-wrapper -->
